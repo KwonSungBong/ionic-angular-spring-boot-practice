@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Social</title>
+</head>
+<body>
+    social
+    <button onclick="login()">login</button>
+    <button onclick="me()">me</button>
+    <button onclick="logout()">logout</button>
+    <button onclick="token()">token</button>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script>
+        var token;
+
+        function token(){
+            $.ajax({
+                url : "/auth/token",
+                type : "get",
+                async : false,
+            }).done(function(response){
+                console.log(response);
+                token = response.token;
+            });
+        }
+
+        function login() {
+            var secUrl = 'http://localhost:3001/auth/facebook';
+            window.open(secUrl);
+        }
+
+        function me(){
+            $.ajax({
+                url : "/auth/me",
+                type : "get",
+                async : false,
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+
+        function logout(){
+            $.ajax({
+                url : "/logout",
+                type : "post",
+                async : false,
+                beforeSend: function(request) {
+                    request.setRequestHeader('X-XSRF-TOKEN', token);
+                }
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+    </script>
+</body>
+</html>

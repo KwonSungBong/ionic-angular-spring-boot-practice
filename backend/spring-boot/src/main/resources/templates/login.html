@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+</head>
+<body>
+    login
+    <button onclick="token()">token</button>
+    <button onclick="login()">login</button>
+    <button onclick="logout()">logout</button>
+    <button onclick="me()">me</button>
+    <button onclick="test()">test</button>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script>
+        // 1. token
+        // 2. login
+        // 3. me
+
+        var token;
+
+        function login(){
+            console.log("token", token);
+            $.ajax({
+                url : "/login",
+                type : "post",
+                async : false,
+                beforeSend: function(request) {
+                    request.setRequestHeader('X-XSRF-TOKEN', token);
+                },
+                data : {username:'user',password:'password'},
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+
+        function logout(){
+            $.ajax({
+                url : "/logout",
+                type : "post",
+                async : false,
+                beforeSend: function(request) {
+                    request.setRequestHeader('X-XSRF-TOKEN', token);
+                }
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+
+        function token(){
+            $.ajax({
+                url : "/auth/token",
+                type : "get",
+                async : false,
+            }).done(function(response){
+                console.log(response);
+                token = response.token;
+            });
+        }
+
+        function me(){
+            $.ajax({
+                url : "/auth/me",
+                type : "get",
+                async : false,
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+
+        function test(){
+            $.ajax({
+                url : "/auth/test",
+                type : "get",
+                async : false,
+            }).done(function(response){
+                console.log(response);
+            });
+        }
+    </script>
+</body>
+</html>
