@@ -19,3 +19,7 @@ spring boot docker 참조 : https://github.com/spring-guides/gs-spring-boot-dock
 ionic start ionic-angular blank
 
 proxy : https://ionicframework.com/docs/cli/configuring.html
+
+#####################################################################################################
+
+nginx setting : frontend/ionic-angular/www
