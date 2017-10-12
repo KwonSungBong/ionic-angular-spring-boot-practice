@@ -2,10 +2,8 @@ server {
   listen 80 default;
   server_name localhost;
 
-#  location / {
-#    root   /var/www/web;
-#    index  index.html index.htm;
-#  }
+  root   /var/www/web;
+  index  index.html index.htm;
 
   location /api/ {
     proxy_pass http://spring-boot/;
