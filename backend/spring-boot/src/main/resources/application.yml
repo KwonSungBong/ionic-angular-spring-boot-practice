@@ -13,7 +13,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
 
   datasource:
-    url: jdbc:mysql://data.bookstorage.kr:3306/spring
+    url: jdbc:mysql://localhost:3306/spring
     username: root
     password: password
     driver-class-name: com.mysql.jdbc.Driver

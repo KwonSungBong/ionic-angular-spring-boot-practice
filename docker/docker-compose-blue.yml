@@ -1,0 +1,6 @@
+version: '2.1'
+services:
+  spring-boot-2:
+    image: spring-boot:0.0.1-SNAPSHOT
+    depends_on:
+      - mysqldb
