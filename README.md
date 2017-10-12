@@ -23,3 +23,5 @@ proxy : https://ionicframework.com/docs/cli/configuring.html
 #####################################################################################################
 
 nginx setting : frontend/ionic-angular/www
+
+docker rmi custom/nginx

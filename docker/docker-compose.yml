@@ -20,7 +20,13 @@ services:
     image: custom/nginx:latest
     ports:
       - "80:80/tcp"
+    depends_on:
+      - spring-boot-1
+    volumes:
+      - ./web:/var/www/web
   spring-boot-1:
     image: spring-boot:0.0.1-SNAPSHOT
+    ports:
+      - "8888:8888/tcp"
     depends_on:
       - mysqldb
