@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by whilemouse on 17. 8. 21.
@@ -37,8 +39,10 @@ public class AuthController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public String test() {
-        return "test";
+    public Map test() {
+        return new HashMap<String,String>() {{
+            put("testKey", "testValue");
+        }};
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)

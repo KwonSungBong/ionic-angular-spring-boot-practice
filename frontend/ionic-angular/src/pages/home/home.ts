@@ -16,7 +16,7 @@ export class HomePage {
   }
 
   test() {
-    this.http.get('http://localhost:8888/auth/test').subscribe(data => {
+    this.http.get('/api/auth/test').subscribe(data => {
       console.log("TEST", data);
     });
   }
