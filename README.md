@@ -44,3 +44,10 @@ docker-compose logs api-tomcat
 docker-compose -f docker-compose-blue.yml -p blue up -d spring-boot-2
 
 docker-compose -f docker-compose-blue.yml -p blue logs spring-boot-2
+
+######################################################################################################
+
+ionic cordova platform add browser
+ionic build browser --prod
+
+ionic cordova build browser --prod --release
