@@ -23,7 +23,8 @@ services:
     depends_on:
       - spring-boot-1
     volumes:
-      - ./web:/var/www/web
+      - ./nginx/web:/var/www/web
+      - ./nginx/site:/etc/nginx/sites-enabled
   spring-boot-1:
     image: spring-boot:0.0.1-SNAPSHOT
     ports:
