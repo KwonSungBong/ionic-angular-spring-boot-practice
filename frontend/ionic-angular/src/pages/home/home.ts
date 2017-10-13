@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-//import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 
 @Component({
@@ -8,7 +7,7 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  token: string;
+  token: any;
 
   constructor(public navCtrl: NavController,
               private http: HttpClient) {
@@ -18,41 +17,52 @@ export class HomePage {
   test() {
     this.http.get('/api/auth/test').subscribe(data => {
       console.log("TEST", data);
+    }, err => {
+      console.log(err);
     });
   }
 
-  /*getToken() {
-    this.http.get('/auth/token').subscribe(data => {
+  getToken() {
+    this.http.get('/api/auth/token').subscribe(data => {
       this.token = data;
       console.log(this.token);
+    }, err => {
+      console.log(err);
     });
   }
 
   login() {
     const body = {};
 
-    this.http.post('/login', body, {
-      headers: new HttpHeaders().set('X-XSRF-TOKEN', this.token.token),
+    this.http.post('/api/login', body, {
+      headers: new HttpHeaders().set('X-XSRF-TOKEN', this.token.token).set('Content-Type', 'application/json; charset=utf-8'),
       params: new HttpParams().set('username', 'user').set('password', 'password'),
-    }).subscribe(data => {
+    }).subscribe(
+      data => {
       console.log(data);
+    }, err => {
+      console.log(err);
     });
   }
 
   logout() {
     const body = {};
 
-    this.http.post('/logout', body, {
+    this.http.post('/api/logout', body, {
       headers: new HttpHeaders().set('X-XSRF-TOKEN', this.token.token),
     }).subscribe(data => {
       console.log(data);
+    }, err => {
+      console.log(err);
     });
   }
 
   me() {
-    this.http.get('/auth/me').subscribe(data => {
+    this.http.get('/api/auth/me').subscribe(data => {
       console.log(data);
+    }, err => {
+      console.log(err);
     });
-  }*/
+  }
 
 }
