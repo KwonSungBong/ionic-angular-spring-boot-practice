@@ -55,3 +55,9 @@ ionic cordova build browser --prod --release
 ######################################################################################################
 
 https://developers.facebook.com/apps/285994385247600/settings/basic/
+
+######################################################################################################
+
+https://github.com/stomp-js/ng2-stompjs
+
+npm install @stomp/ng2-stompjs --save
