@@ -65,4 +65,9 @@ export class HomePage {
     });
   }
 
+  social() {
+    var secUrl = 'http://211.238.242.169:8899/auth/facebook';
+    window.open(secUrl);
+  }
+
 }

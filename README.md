@@ -51,3 +51,7 @@ ionic cordova platform add browser
 ionic build browser --prod
 
 ionic cordova build browser --prod --release
+
+######################################################################################################
+
+https://developers.facebook.com/apps/285994385247600/settings/basic/
