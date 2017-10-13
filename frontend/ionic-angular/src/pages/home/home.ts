@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 
+var Socket = require('sockjs-client');
+var Stomp = require('stompjs');
+let socket;
+let stompClient;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -68,6 +73,47 @@ export class HomePage {
   social() {
     var secUrl = 'http://211.238.242.169:8899/auth/facebook';
     window.open(secUrl);
+  }
+
+  socket() {
+    const socketUrl = "http://localhost:8899/websocket";
+
+    const stompConnect = () => {
+      socket = new Socket(socketUrl);
+      stompClient = Stomp.over(socket);
+      stompClient.debug = null;
+      stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        const url = '/talk/room.list';
+        stompClient.subscribe(url, function (response) {
+          // const url = 'http://' + config.apiHost + ':' + config.apiPort + '/image/download';
+          const responseBody = JSON.parse(response.body);
+          console.log(responseBody);
+        });
+      }, stompReconnect);
+    }
+
+    const stompReconnect = () => {
+      setTimeout(stompConnect, 1000);
+    }
+
+    stompConnect();
+  }
+
+  test1() {
+    stompClient.send("/app/talk/room.find", {}, JSON.stringify({}));
+  }
+
+  test2() {
+    stompClient.send("/app/talk/room.insert", {}, JSON.stringify({}));
+  }
+
+  test3() {
+    stompClient.send("/app/talk/room.update", {}, JSON.stringify({}));
+  }
+
+  test4() {
+    stompClient.send("/app/talk/room.delete", {}, JSON.stringify({}));
   }
 
 }
