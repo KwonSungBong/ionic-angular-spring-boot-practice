@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 
-var Socket = require('sockjs-client');
-var Stomp = require('stompjs');
+import Socket from 'sockjs-client'
+import Stomp from 'stompjs'
 let socket;
 let stompClient;
 
