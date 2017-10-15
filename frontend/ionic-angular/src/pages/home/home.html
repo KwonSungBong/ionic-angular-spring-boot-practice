@@ -3,19 +3,46 @@
     <ion-title>
       home
     </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        로그아웃
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button (click)="test()">test</button>
-  <button (click)="getToken()">getToken</button>
-  <button (click)="login()">login</button>
-  <button (click)="logout()">logout</button>
-  <button (click)="me()">me</button>
-  <button (click)="social()">social</button>
-  <button (click)="socket()">socket</button>
-  <button (click)="test1()">socket목록</button>
-  <button (click)="test2()">socket추가</button>
-  <button (click)="test3()">socket수정</button>
-  <button (click)="test4()">socket삭제</button>
+  <ion-list>
+    <button ion-item *ngFor="let item of items" (click)="selectTalk(item)">
+      {{ item.subject }}
+    </button>
+  </ion-list>
+  <!--<button (click)="test()">test</button>-->
+  <!--<button (click)="getToken()">getToken</button>-->
+  <!--<button (click)="login()">login</button>-->
+  <!--<button (click)="logout()">logout</button>-->
+  <!--<button (click)="me()">me</button>-->
+  <!--<button (click)="social()">social</button>-->
+  <!--<button (click)="socket()">socket</button>-->
+  <!--<button (click)="test1()">socket목록</button>-->
+  <!--<button (click)="test2()">socket추가</button>-->
+  <!--<button (click)="test3()">socket수정</button>-->
+  <!--<button (click)="test4()">socket삭제</button>-->
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="selectRandomTalk()">
+          <ion-icon name="contract"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="createTalk()">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

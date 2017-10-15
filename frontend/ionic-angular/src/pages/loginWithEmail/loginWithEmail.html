@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      loginWithEmail
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>email</ion-label>
+      <ion-input type="text" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="complete()">로그인</button>
+  <button ion-button block (click)="joinWithEmailPage()">가입</button>
+  <button ion-button block (click)="findEmailPasswordPage()">비밀번호찾기</button>
+  <button ion-button block (click)="cancel()">취소</button>
+</ion-content>
