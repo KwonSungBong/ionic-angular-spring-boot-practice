@@ -5,6 +5,7 @@ import { AlertController } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { LoginWithEmailPage } from '../loginWithEmail/loginWithEmail';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

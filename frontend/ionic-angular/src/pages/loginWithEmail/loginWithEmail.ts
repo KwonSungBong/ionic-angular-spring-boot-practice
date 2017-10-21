@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { JoinWithEmailPage } from '../joinWithEmail/joinWithEmail';
 import { FindEmailPasswordPage } from '../findEmailPassword/findEmailPassword';
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'page-login-with-email',
@@ -15,12 +16,16 @@ export class LoginWithEmailPage {
 
   constructor(public navCtrl: NavController,
               protected app: App,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              private authService: AuthService) {
   }
 
   complete() {
-    // const email="rnjstjdqhd39@naver.com";
-    // const password="rnjstjdqhd39@";
+    const username = 'user';
+    const password = 'password';
+    this.authService.login(username, password,
+      data => this.authService.me(() =>
+        this.app.getRootNav().setRoot(HomePage)));
   }
 
   cancel() {

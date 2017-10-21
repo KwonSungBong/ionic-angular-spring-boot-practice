@@ -6,6 +6,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+
+import { AuthService } from '../services/auth.service';
+import { TalkService } from '../services/talk.service';
+
 import { LoginPage } from '../pages/login/login';
 import { JoinWithEmailPage } from '../pages/joinWithEmail/joinWithEmail';
 import { LoginWithEmailPage } from '../pages/loginWithEmail/loginWithEmail';
@@ -41,6 +45,8 @@ import { TalkPage } from '../pages/talk/talk';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
+    TalkService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

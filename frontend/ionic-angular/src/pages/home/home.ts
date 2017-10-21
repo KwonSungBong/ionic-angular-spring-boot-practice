@@ -5,6 +5,7 @@ import { App } from "ionic-angular";
 
 import { LoginPage } from '../login/login';
 import { TalkPage } from '../talk/talk';
+import {AuthService} from "../../services/auth.service";
 
 // import Socket from 'sockjs-client'
 // import Stomp from 'stompjs'
@@ -21,14 +22,17 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController,
-              protected app: App
+              protected app: App,
+              private authService: AuthService
               // ,private http: HttpClient
   ) {
 
   }
 
   logout() {
-    this.app.getRootNav().setRoot(LoginPage);
+    this.authService.logout(data =>
+      this.authService.setToken(() =>
+        this.app.getRootNav().setRoot(LoginPage)));
   }
 
   enterTalk(talk) {
