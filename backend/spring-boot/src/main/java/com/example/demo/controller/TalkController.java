@@ -85,6 +85,7 @@ public class TalkController {
     @SendTo("/talk/room.message.list/{roomIdx}")
     public List<MessageDto.Summary> insertMessage(@DestinationVariable long roomIdx, MessageDto.Create message, Principal user) {
         message.setCreatedUser(new UserDto.Refer((Long)((UsernamePasswordAuthenticationToken) user).getCredentials()));
+        message.setRoom(new RoomDto.Refer(roomIdx));
         talkServiceImpl.createMessage(message);
         return talkServiceImpl.findMessageSummaryList(roomIdx);
     }

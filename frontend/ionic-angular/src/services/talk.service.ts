@@ -14,6 +14,7 @@ export class TalkService {
   items: any[] = [];
   talk: any = {};
   messages: any[] = [];
+  messageEvent: any;
 
   constructor() {
 
@@ -41,9 +42,9 @@ export class TalkService {
           this.talk = responseBody;
 
           this.findMessage();
-          stompClient.subscribe('/talk/room.message.list/'+this.talk.idx, response => {
+          this.messageEvent = stompClient.subscribe('/talk/room.message.list/'+this.talk.idx, response => {
             const responseBody = JSON.parse(response.body);
-            console.log("messages", responseBody);
+            console.log("messages"+this.talk.idx, responseBody);
             this.messages = responseBody;
           });
         });
@@ -65,6 +66,10 @@ export class TalkService {
     stompClient.send("/app/talk/room.enter/"+this.user.id, {}, JSON.stringify(talk));
   }
 
+  exit(){
+    this.messageEvent.unsubscribe();
+  }
+
   insert(talk) {
     stompClient.send("/app/talk/room.insert/"+this.user.id, {}, JSON.stringify(talk));
   }
@@ -79,6 +84,7 @@ export class TalkService {
     stompClient.send("/app/talk/room.message.insert/"+this.talk.idx, {}, JSON.stringify(message));
   }
 
+
   // update() {
   //   stompClient.send("/app/talk/room.update", {}, JSON.stringify({}));
   // }
@@ -86,17 +92,5 @@ export class TalkService {
   // delete() {
   //   stompClient.send("/app/talk/room.delete", {}, JSON.stringify({}));
   // }
-
-  startTalk() {
-    // stompClient.subscribe('/talk/room.message/'+this.talk.idx, response => {
-    //   const responseBody = JSON.parse(response.body);
-    //   console.log("messages", responseBody);
-    //   this.messages = responseBody;
-    // });
-  }
-
-  endTalk() {
-    // stompClient.unsubscribe('/talk/room.message/'+this.talk.idx);
-  }
 
 }

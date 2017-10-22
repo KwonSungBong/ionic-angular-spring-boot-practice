@@ -45,7 +45,7 @@ export class AuthService {
     this.http.post('/api/login', body, {
       headers: new HttpHeaders().set('X-XSRF-TOKEN', this.token.token)
         .set('Content-Type', 'application/json; charset=utf-8'),
-      params: new HttpParams().set('username', 'user').set('password', 'password'),
+      params: new HttpParams().set('username', username).set('password', password),
     }).subscribe(
       data => {
         callback && callback(data);

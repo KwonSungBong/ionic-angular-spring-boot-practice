@@ -22,7 +22,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
  */
 @EnableWebSecurity
 //@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 86400)
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/js/**", "/fonts/**", "/index", "/form", "/login", "/social", "/auth/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/fonts/**", "/index", "/form", "/login", "/social", "/auth/**", "/websocket/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()

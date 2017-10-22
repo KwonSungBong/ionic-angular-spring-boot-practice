@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Content } from 'ionic-angular';
-import {AuthService} from "../../services/auth.service";
 import {TalkService} from "../../services/talk.service";
 
 @Component({
@@ -36,7 +35,7 @@ export class TalkPage {
   }
 
   ionViewWillLeave() {
-    this.talkService.endTalk();
+    this.talkService.exit();
   }
 
   sendMessage() {

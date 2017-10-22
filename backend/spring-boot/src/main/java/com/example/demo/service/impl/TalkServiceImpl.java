@@ -75,11 +75,13 @@ public class TalkServiceImpl implements TalkService {
     @Transactional
     public List<MessageDto.Summary> findMessageSummaryList(long roomIdx) {
         return messageRepository.findAll().stream()
+                .filter(message -> message.getRoom().getIdx() == roomIdx)
                 .map(message ->  modelMapper.map(message, MessageDto.Summary.class))
                 .collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void createMessage(MessageDto.Create message) {
         Message result = modelMapper.map(message, Message.class);
         messageRepository.save(result);

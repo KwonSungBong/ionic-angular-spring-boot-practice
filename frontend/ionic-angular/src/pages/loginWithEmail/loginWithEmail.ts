@@ -13,6 +13,8 @@ import { AuthService } from "../../services/auth.service";
   templateUrl: 'loginWithEmail.html'
 })
 export class LoginWithEmailPage {
+  username: string = "";
+  password: string = "";
 
   constructor(public navCtrl: NavController,
               protected app: App,
@@ -21,8 +23,10 @@ export class LoginWithEmailPage {
   }
 
   complete() {
-    const username = 'user';
+    const username = this.username;
+    // const password = this.password;
     const password = 'password';
+
     this.authService.login(username, password,
       data => this.authService.me(() =>
         this.app.getRootNav().setRoot(HomePage)));

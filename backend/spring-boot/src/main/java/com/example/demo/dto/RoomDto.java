@@ -64,6 +64,12 @@ public class RoomDto {
     @Data
     public static class Refer {
         private long idx;
+
+        public Refer() {}
+
+        public Refer(long idx) {
+            this.idx = idx;
+        }
     }
 
 }

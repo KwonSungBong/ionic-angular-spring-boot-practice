@@ -43,7 +43,7 @@ public class UserDto {
     public static class Refer {
         private long id;
 
-        Refer() {}
+        public Refer() {}
 
         public Refer(long id) {
             this.id = id;
