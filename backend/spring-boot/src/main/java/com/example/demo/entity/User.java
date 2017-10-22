@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +13,8 @@ import java.util.List;
  */
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"authorities", "socialUser"})
+@ToString(exclude = {"authorities", "socialUser"})
 public class User implements Serializable {
 
     @Id

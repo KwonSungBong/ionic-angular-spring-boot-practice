@@ -1,6 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import { Content } from 'ionic-angular';
+import {AuthService} from "../../services/auth.service";
+import {TalkService} from "../../services/talk.service";
 
 @Component({
   selector: 'page-talk',
@@ -8,17 +10,15 @@ import { Content } from 'ionic-angular';
 })
 export class TalkPage {
   @ViewChild(Content) content: Content;
-  createdUser: any;
   talk: any;
   message: string = "";
-  items: any[] = [];
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
-
+              public navParams: NavParams,
+              private talkService: TalkService) {
     setTimeout(() => {
       this.content.scrollToBottom(0)
-    }, 10);
+    }, 50);
   }
 
   ngAfterViewInit() {
@@ -32,25 +32,24 @@ export class TalkPage {
   ionViewWillEnter(): void {
     setTimeout(() => {
       this.content.scrollToBottom(0)
-    }, 10);
+    }, 50);
   }
 
   ionViewWillLeave() {
+    this.talkService.endTalk();
   }
 
   sendMessage() {
     const data = {
-      createdUser: this.createdUser,
-      message: this.message,
-      createdDate: Date.now()
+      content: this.message,
     };
 
-    this.items.push(data);
+    this.talkService.insertMessage(data);
 
     setTimeout(() => {
       this.message = "";
       this.content.scrollToBottom(0);
-    }, 10);
+    }, 50);
   }
 
 }

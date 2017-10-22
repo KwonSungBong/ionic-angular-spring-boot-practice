@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -19,8 +21,10 @@ import javax.persistence.*;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "POST")
+@Table(name = "MESSAGE")
 @Data
+@EqualsAndHashCode(exclude = {"room", "createdUser", "lastModifiedUser"})
+@ToString(exclude = {"room", "createdUser", "lastModifiedUser"})
 public class Message {
 
     @Id

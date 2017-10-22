@@ -15,9 +15,17 @@ public class MessageDto {
     }
 
     @Data
+    public static class Summary {
+        private long idx;
+        private String content;
+        private UserDto.Summary createdUser;
+    }
+
+    @Data
     public static class Create {
         private String content;
         private RoomDto.Refer room;
+        private UserDto.Refer createdUser;
     }
 
 }

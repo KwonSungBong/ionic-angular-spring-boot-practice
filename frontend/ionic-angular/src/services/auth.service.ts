@@ -72,12 +72,17 @@ export class AuthService {
 
   me(callback) {
     this.http.get('/api/auth/me').subscribe(data => {
-      this.user = data.principal.user;
-      console.log(data);
+      this.user = data['principal']['user'];
       callback && callback(data);
+      console.log(data);
     }, err => {
       console.log(err);
     });
   }
+
+  // social() {
+  //   var secUrl = 'http://211.238.242.169:8899/auth/facebook';
+  //   window.open(secUrl);
+  // }
 
 }

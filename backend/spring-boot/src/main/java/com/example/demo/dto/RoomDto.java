@@ -20,13 +20,14 @@ public class RoomDto {
         private List<ParticipantDto.Detail> participantList;
         private UserDto.Summary createdUser;
 
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
-        private Date createdDate;
+//        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+//        private Date createdDate;
 
     }
 
     @Data
     public static class Detail {
+        private long idx;
         private String subject;
         private String description;
         private int participantLimit;
@@ -34,8 +35,8 @@ public class RoomDto {
         private List<MessageDto.Detail> messageList;
         private UserDto.Summary createdUser;
 
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
-        private Date createdDate;
+//        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+//        private Date createdDate;
 
     }
 
@@ -44,10 +45,12 @@ public class RoomDto {
         private String subject;
         private String description;
         private int participantLimit;
+        private UserDto.Refer createdUser;
     }
 
     @Data
     public static class Update {
+        private long idx;
         private String subject;
         private String description;
         private int participantLimit;
@@ -55,9 +58,7 @@ public class RoomDto {
 
     @Data
     public static class Delete {
-        private String subject;
-        private String description;
-        private int participantLimit;
+        private long idx;
     }
 
     @Data

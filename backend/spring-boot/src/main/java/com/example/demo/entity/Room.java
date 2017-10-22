@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -17,8 +19,10 @@ import java.util.List;
  */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "POST")
+@Table(name = "ROOM")
 @Data
+@EqualsAndHashCode(exclude = {"participantList", "messageList", "createdUser", "lastModifiedUser"})
+@ToString(exclude = {"participantList", "messageList", "createdUser", "lastModifiedUser"})
 public class Room {
 
     @Id

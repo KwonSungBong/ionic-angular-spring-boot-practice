@@ -1,16 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{talk.subject}}
+      {{talkService.talk.subject}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <p *ngFor="let message of items">
-    {{ message.createdUser == createdUser ? '나' : '상대방' }}
+  <p *ngFor="let message of talkService.messages">
+    {{ message.createdUser.id == talkService.user.id ? '나' : '상대방' }}
     :
-    {{ message.message }}
+    {{ message.content }}
   </p>
 </ion-content>
 

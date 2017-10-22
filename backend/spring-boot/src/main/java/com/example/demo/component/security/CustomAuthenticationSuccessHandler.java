@@ -22,22 +22,22 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        SavedRequest savedRequest
-                = requestCache.getRequest(request, response);
-
-        if (savedRequest == null) {
-            clearAuthenticationAttributes(request);
-            return;
-        }
-        String targetUrlParam = getTargetUrlParameter();
-        if (isAlwaysUseDefaultTargetUrl()
-                || (targetUrlParam != null
-                && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
-            requestCache.removeRequest(request, response);
-            clearAuthenticationAttributes(request);
-            return;
-        }
-
-        clearAuthenticationAttributes(request);
+//        SavedRequest savedRequest
+//                = requestCache.getRequest(request, response);
+//
+//        if (savedRequest == null) {
+//            clearAuthenticationAttributes(request);
+//            return;
+//        }
+//        String targetUrlParam = getTargetUrlParameter();
+//        if (isAlwaysUseDefaultTargetUrl()
+//                || (targetUrlParam != null
+//                && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
+//            requestCache.removeRequest(request, response);
+//            clearAuthenticationAttributes(request);
+//            return;
+//        }
+//
+//        clearAuthenticationAttributes(request);
     }
 }

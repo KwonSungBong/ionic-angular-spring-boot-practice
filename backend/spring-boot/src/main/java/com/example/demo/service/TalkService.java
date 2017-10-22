@@ -12,11 +12,15 @@ public interface TalkService {
 
     List<RoomDto.Summary> findRoomSummaryList();
 
-    void createRoom(RoomDto.Create room);
+    RoomDto.Detail findRoomDetail(long id);
 
-    void updateRoom(RoomDto.Update room);
+    RoomDto.Detail createRoom(RoomDto.Create room);
+
+    RoomDto.Detail updateRoom(RoomDto.Update room);
 
     void deleteRoom(RoomDto.Delete room);
+
+    List<MessageDto.Summary> findMessageSummaryList(long roomIdx);
 
     void createMessage(MessageDto.Create message);
 
