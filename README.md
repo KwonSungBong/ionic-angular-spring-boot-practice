@@ -71,3 +71,9 @@ https://github.com/stomp-js/ng2-stompjs
 ######################################################################################################
 
 https://angular.io/tutorial/toh-pt6
+
+https://awaters1.github.io/Angular2-Stomp-WebSockets/
+
+http://codegists.com/snippet/typescript/stomp-clientts_ccarrasc_typescript
+
+http://codegists.com/snippet/typescript/stompclientts_martypitt_typescript
