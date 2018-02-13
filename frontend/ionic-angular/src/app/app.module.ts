@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 
+import { StompClient } from "../services/stomp.client";
 import { AuthService } from '../services/auth.service';
 import { TalkService } from '../services/talk.service';
 
@@ -45,8 +46,10 @@ import { TalkPage } from '../pages/talk/talk';
   providers: [
     StatusBar,
     SplashScreen,
+    StompClient,
     AuthService,
     TalkService,
+    {provide: 'SOCKET_URL', useValue: 'http://localhost:8899/websocket'},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
