@@ -29,10 +29,6 @@ export class HomePage {
       this.app.getRootNav().setRoot(LoginPage)));
   }
 
-  enterTalk(talk) {
-    // this.navCtrl.push(TalkPage, talk);
-  }
-
   selectTalk(talk) {
     this.talkService.enter(talk);
     this.navCtrl.push(TalkPage);
@@ -40,7 +36,7 @@ export class HomePage {
 
   selectRandomTalk() {
     // const talk = this.items[0];
-    // this.enterTalk(talk);
+    // this.selectTalk(talk);
   }
 
   createTalk() {
@@ -65,16 +61,6 @@ export class HomePage {
             const subject: string = data.subject;
             this.talkService.insert({subject: subject});
             this.navCtrl.push(TalkPage);
-            // this.enterTalk({subject: subject});
-            // const createdDate = Date.now();
-            // const createdUser = '';
-            // let item = {
-            //   subject: subject,
-            //   createdDate: createdDate,
-            //   createdUser: createdUser,
-            //   numberOfConnections: 0
-            // };
-            // this.enterTalk(item);
           }
         }
       ]
