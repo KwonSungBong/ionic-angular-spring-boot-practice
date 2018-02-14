@@ -25,8 +25,8 @@ export class HomePage {
 
   logout() {
     this.authService.logout(data =>
-      this.authService.setToken(() =>
-        this.app.getRootNav().setRoot(LoginPage)));
+    this.authService.setToken(() =>
+      this.app.getRootNav().setRoot(LoginPage)));
   }
 
   enterTalk(talk) {

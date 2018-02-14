@@ -9,14 +9,13 @@ public class ParticipantDto {
 
     @Data
     public static class Summary {
-        private long idx;
-        private UserDto.Summary createdUser;
+        private UserDto.Summary user;
     }
 
     @Data
     public static class Detail {
         private long idx;
-        private UserDto.Summary createdUser;
+        private UserDto.Summary user;
     }
 
     @Data

@@ -81,3 +81,5 @@ http://codegists.com/snippet/typescript/stomp-clientts_ccarrasc_typescript
 http://shiren.github.io/2017-01-03-RxJS%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%8A%94-%ED%95%A8%EC%88%98%ED%98%95-%EB%A6%AC%EC%95%A1%ED%8B%B0%EB%B8%8C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/
 
 http://reactivex.io/rxjs/
+
+https://github.com/li7nux/spring-boot-kafka-websocket

@@ -35,6 +35,8 @@ public class TalkController {
 
     @SubscribeMapping("/talk/room.enter/{id}")
     public void enterRoom(@DestinationVariable long id, RoomDto.Refer room, Principal user) {
+        long userIdx = (Long)((UsernamePasswordAuthenticationToken) user).getCredentials();
+        talkServiceImpl.participateRoom(room.getIdx(), userIdx);
         messageSender.convertAndSend("/talk/room.enter/" + id, talkServiceImpl.findRoomDetail(room.getIdx()));
     }
 

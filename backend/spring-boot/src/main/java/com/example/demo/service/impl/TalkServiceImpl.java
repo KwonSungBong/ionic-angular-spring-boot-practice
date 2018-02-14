@@ -3,16 +3,20 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.MessageDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.entity.Message;
+import com.example.demo.entity.Participant;
 import com.example.demo.entity.Room;
+import com.example.demo.entity.User;
 import com.example.demo.repository.MessageRepository;
-import com.example.demo.repository.ParticipantRepository;
 import com.example.demo.repository.RoomRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.TalkService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +33,10 @@ public class TalkServiceImpl implements TalkService {
     private RoomRepository roomRepository;
 
     @Autowired
-    private ParticipantRepository participantRepository;
+    private MessageRepository messageRepository;
 
     @Autowired
-    private MessageRepository messageRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional
@@ -52,6 +56,14 @@ public class TalkServiceImpl implements TalkService {
     @Transactional
     public RoomDto.Detail createRoom(RoomDto.Create room) {
         Room result = modelMapper.map(room, Room.class);
+
+        User user = userRepository.findOne(result.getCreatedUser().getId());
+        Participant participant = new Participant();
+        participant.setUser(user);
+        participant.setRoom(result);
+        List<Participant> participantList = Arrays.asList(participant);
+        result.setParticipantList(participantList);
+
         roomRepository.save(result);
         return modelMapper.map(result, RoomDto.Detail.class);
     }
@@ -84,12 +96,31 @@ public class TalkServiceImpl implements TalkService {
     @Transactional
     public void createMessage(MessageDto.Create message) {
         Message result = modelMapper.map(message, Message.class);
+        result.setCreatedDate(new Date());
         messageRepository.save(result);
     }
 
     @Override
     public void participateRoom(int roomIdx) {
 
+    }
+
+    @Override
+    @Transactional
+    public void participateRoom(long roomIdx, long userId) {
+        Room room = roomRepository.findOne(roomIdx);
+        User user = userRepository.findOne(userId);
+
+        if(room.getParticipantList()
+                .stream()
+                .filter(participant -> participant.getRoom().getIdx() == roomIdx &&
+                        participant.getUser().getId() == userId)
+                .count() == 0) {
+            Participant participant = new Participant();
+            participant.setUser(user);
+            participant.setRoom(room);
+            room.getParticipantList().add(participant);
+        }
     }
 
     @Override

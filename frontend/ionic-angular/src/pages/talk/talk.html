@@ -8,7 +8,9 @@
 
 <ion-content padding>
   <p *ngFor="let message of talkService.messages">
-    {{ message.createdUser.id == talkService.user.id ? '나' : '상대방' }}
+    {{ message.createdUser.id == talkService.user.id ? '*' : '' }}
+    {{ message.createdUser.userName }}
+    ({{ message.createdDate }})
     :
     {{ message.content }}
   </p>

@@ -26,5 +26,8 @@ public interface TalkService {
 
     void participateRoom(int roomIdx);
 
+    void participateRoom(long roomIdx, long userIdx);
+
     void desertRoom(int roomIdx, int participantIdx);
+
 }

@@ -1,6 +1,9 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * Created by whilemouse on 17. 10. 13.
@@ -12,6 +15,9 @@ public class MessageDto {
         private long idx;
         private String content;
         private UserDto.Summary createdUser;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+        private Date createdDate;
     }
 
     @Data
@@ -19,6 +25,9 @@ public class MessageDto {
         private long idx;
         private String content;
         private UserDto.Summary createdUser;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
+        private Date createdDate;
     }
 
     @Data

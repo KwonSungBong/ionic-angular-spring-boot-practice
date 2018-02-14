@@ -17,7 +17,7 @@ export class TalkPage {
               private talkService: TalkService) {
     setTimeout(() => {
       this.content.scrollToBottom(0)
-    }, 50);
+    }, 100);
   }
 
   ngAfterViewInit() {
@@ -31,7 +31,7 @@ export class TalkPage {
   ionViewWillEnter(): void {
     setTimeout(() => {
       this.content.scrollToBottom(0)
-    }, 50);
+    }, 100);
   }
 
   ionViewWillLeave() {
