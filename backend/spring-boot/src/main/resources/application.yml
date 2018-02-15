@@ -14,9 +14,9 @@ spring:
 
   datasource:
 #    url: jdbc:mysql://localhost:3306/spring
-    url: jdbc:mysql://data.bookstorage.kr:3306/spring
+    url: jdbc:mysql://1.230.35.113:3306/spring?characterEncoding=utf8&useUnicode=true&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
     username: root
-    password: password
+    password: "password"
     driver-class-name: com.mysql.jdbc.Driver
 
   social:

@@ -4,6 +4,7 @@ import com.example.demo.dto.MessageDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.TalkService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -27,6 +28,9 @@ public class TalkController {
     @Autowired
     private TalkService talkServiceImpl;
 
+    @Autowired
+    private UserService userServiceImpl;
+
     @SubscribeMapping("/talk/room.find")
     @SendTo("/talk/room.list")
     public List<RoomDto.Summary> findRoom() {
@@ -44,7 +48,6 @@ public class TalkController {
 //    @SendTo({"/talk/room.list", "/talk/room.insert/{id}"})
     public void insertRoom(@DestinationVariable long id, RoomDto.Create room, Principal user) {
         room.setCreatedUser(new UserDto.Refer((Long)((UsernamePasswordAuthenticationToken) user).getCredentials()));
-
         messageSender.convertAndSend("/talk/room.enter/" + id, talkServiceImpl.createRoom(room));
         messageSender.convertAndSend("/talk/room.list", talkServiceImpl.findRoomSummaryList());
     }

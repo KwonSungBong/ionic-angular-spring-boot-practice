@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UserProfile;
@@ -40,6 +42,8 @@ public class AuthController {
     @RequestMapping("/test")
     @ResponseBody
     public Map test() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
         return new HashMap<String,String>() {{
             put("testKey", "testValue");
         }};
