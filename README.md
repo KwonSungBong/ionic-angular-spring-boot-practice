@@ -83,3 +83,17 @@ http://shiren.github.io/2017-01-03-RxJS%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%98%EB%
 http://reactivex.io/rxjs/
 
 https://github.com/li7nux/spring-boot-kafka-websocket
+
+######################################################################################################
+
+ionic cordova emulate android -lc 
+
+ionic cordova emulate android -lc --prod
+
+https://ionicframework.com/docs/developer-resources/developer-tips/
+
+
+
+
+
+
