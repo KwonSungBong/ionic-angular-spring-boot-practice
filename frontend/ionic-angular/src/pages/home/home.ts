@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-import { App } from "ionic-angular";
+import {AlertController, App, NavController} from 'ionic-angular';
 
-import { LoginPage } from '../login/login';
-import { TalkPage } from '../talk/talk';
+import {LoginPage} from '../login/login';
+import {TalkPage} from '../talk/talk';
 import {AuthService} from "../../services/auth.service";
 import {TalkService} from "../../services/talk.service";
 

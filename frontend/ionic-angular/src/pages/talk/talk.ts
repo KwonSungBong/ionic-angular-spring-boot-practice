@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import { Content } from 'ionic-angular';
+import {Content, NavController, NavParams} from 'ionic-angular';
 import {TalkService} from "../../services/talk.service";
 
 @Component({

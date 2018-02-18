@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {AlertController, NavController} from 'ionic-angular';
 
 @Component({
   selector: 'page-join-with-email',

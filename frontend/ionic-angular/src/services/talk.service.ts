@@ -57,22 +57,19 @@ export class TalkService {
   }
 
   findMessage() {
-    // console.log("room.message.find", "/app/talk/room.message.find/"+(this.talk.idx))
     this.stompClient.send("/app/talk/room.message.find/"+(this.talk.idx ? this.talk.idx : 1), {}, JSON.stringify({}));
   }
 
   insertMessage(message) {
-    // console.log("room.message.insert", "/app/talk/room.message.insert/"+(this.talk.idx))
     this.stompClient.send("/app/talk/room.message.insert/"+this.talk.idx, {}, JSON.stringify(message));
   }
 
-
   // update() {
-  //   stompClient.send("/app/talk/room.update", {}, JSON.stringify({}));
+  //   this.stompClient.send("/app/talk/room.update", {}, JSON.stringify({}));
   // }
   //
   // delete() {
-  //   stompClient.send("/app/talk/room.delete", {}, JSON.stringify({}));
+  //   this.stompClient.send("/app/talk/room.delete", {}, JSON.stringify({}));
   // }
 
 }

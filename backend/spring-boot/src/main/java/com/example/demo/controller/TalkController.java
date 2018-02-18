@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.MessageDto;
 import com.example.demo.dto.RoomDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.entity.User;
 import com.example.demo.service.TalkService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -39,15 +39,17 @@ public class TalkController {
 
     @SubscribeMapping("/talk/room.enter/{id}")
     public void enterRoom(@DestinationVariable long id, RoomDto.Refer room, Principal user) {
-        long userIdx = (Long)((UsernamePasswordAuthenticationToken) user).getCredentials();
-        talkServiceImpl.participateRoom(room.getIdx(), userIdx);
+        User principalUser = userServiceImpl.getUesr(user);
+
+        talkServiceImpl.participateRoom(room.getIdx(), principalUser.getId());
         messageSender.convertAndSend("/talk/room.enter/" + id, talkServiceImpl.findRoomDetail(room.getIdx()));
     }
 
     @SubscribeMapping("/talk/room.insert/{id}")
 //    @SendTo({"/talk/room.list", "/talk/room.insert/{id}"})
     public void insertRoom(@DestinationVariable long id, RoomDto.Create room, Principal user) {
-        room.setCreatedUser(new UserDto.Refer((Long)((UsernamePasswordAuthenticationToken) user).getCredentials()));
+        User principalUser = userServiceImpl.getUesr(user);
+        room.setCreatedUser(new UserDto.Refer(principalUser.getId()));
         messageSender.convertAndSend("/talk/room.enter/" + id, talkServiceImpl.createRoom(room));
         messageSender.convertAndSend("/talk/room.list", talkServiceImpl.findRoomSummaryList());
     }
@@ -89,7 +91,8 @@ public class TalkController {
     @SubscribeMapping("/talk/room.message.insert/{roomIdx}")
     @SendTo("/talk/room.message.list/{roomIdx}")
     public List<MessageDto.Summary> insertMessage(@DestinationVariable long roomIdx, MessageDto.Create message, Principal user) {
-        message.setCreatedUser(new UserDto.Refer((Long)((UsernamePasswordAuthenticationToken) user).getCredentials()));
+        User principalUser = userServiceImpl.getUesr(user);
+        message.setCreatedUser(new UserDto.Refer(principalUser.getId()));
         message.setRoom(new RoomDto.Refer(roomIdx));
         talkServiceImpl.createMessage(message);
         return talkServiceImpl.findMessageSummaryList(roomIdx);

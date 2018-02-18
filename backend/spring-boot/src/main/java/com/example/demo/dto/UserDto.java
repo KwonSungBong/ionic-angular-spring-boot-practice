@@ -11,6 +11,7 @@ public class UserDto {
     @Data
     public static class Create {
         private String password;
+        private String name;
         private String userName;
     }
 
@@ -18,22 +19,22 @@ public class UserDto {
     public static class Update {
         private long id;
         private String password;
+        private String name;
         private String userName;
     }
 
     @Data
     public static class Summary {
         private long id;
+        private String name;
         private String userName;
     }
 
     @Data
-    public static class Response {
+    public static class Login {
         private long id;
-        private String userName;
-        private boolean enabled;
-        private DateTime createdDate;
-        private DateTime lastModifiedDate;
+        private String name;
+        private String username;
 
 //        private List<UserRoleDto.Response> userRoleList;
     }

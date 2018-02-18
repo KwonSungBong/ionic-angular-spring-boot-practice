@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { App } from "ionic-angular";
-import { AlertController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {AlertController, App, NavController} from 'ionic-angular';
 
-import { HomePage } from '../home/home';
-import { JoinWithEmailPage } from '../joinWithEmail/joinWithEmail';
-import { FindEmailPasswordPage } from '../findEmailPassword/findEmailPassword';
-import { AuthService } from "../../services/auth.service";
+import {HomePage} from '../home/home';
+import {JoinWithEmailPage} from '../joinWithEmail/joinWithEmail';
+import {FindEmailPasswordPage} from '../findEmailPassword/findEmailPassword';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'page-login-with-email',

@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import { Observable, Observer, BehaviorSubject, ReplaySubject } from 'rxjs/Rx';
+import {BehaviorSubject, Observable, Observer, ReplaySubject} from 'rxjs/Rx';
 import Socket from 'sockjs-client';
 import Stomp from 'stompjs';
 

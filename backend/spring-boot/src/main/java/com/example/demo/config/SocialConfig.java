@@ -2,6 +2,8 @@ package com.example.demo.config;
 
 import com.example.demo.component.social.CustomSocialAndUserDetailService;
 import com.example.demo.component.social.CustomSocialUsersConnectionRepository;
+import com.example.demo.component.social.kakao.connect.KakaoConnectionFactory;
+import com.example.demo.component.social.naver.connect.NaverConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +33,15 @@ public class SocialConfig implements SocialConfigurer {
     @Value("${spring.social.google.app-secret}")
     private String googleSecret;
 
+    @Value("${spring.social.kakao.app-id}")
+    private String kakaoAppId;
+
+    @Value("${spring.social.naver.app-id}")
+    private String naverAppId;
+
+    @Value("${spring.social.naver.app-secret}")
+    private String naverSecret;
+
     @Autowired
     private ConnectionSignUp autoSignUpHandler;
 
@@ -39,11 +50,21 @@ public class SocialConfig implements SocialConfigurer {
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
+        connectionFactoryConfigurer.addConnectionFactory(
+                new KakaoConnectionFactory(kakaoAppId)
+        );
+        connectionFactoryConfigurer.addConnectionFactory(
+                new NaverConnectionFactory(
+                        naverAppId,
+                        naverSecret
+                )
+        );
         GoogleConnectionFactory gcf = new GoogleConnectionFactory(
                 googleAppId,
                 googleSecret
         );
         gcf.setScope("email");
+        connectionFactoryConfigurer.addConnectionFactory(gcf);
     }
 
     @Override

@@ -1,7 +1,7 @@
 /**
  * Created by ksb on 2017. 10. 21..
  */
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
@@ -9,8 +9,8 @@ export class AuthService {
   token: any;
   user: any;
 
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient,
+              @Inject('AUTH_URL') private url) {
   }
 
   test() {
@@ -72,7 +72,7 @@ export class AuthService {
 
   me(callback) {
     this.http.get('/api/auth/me').subscribe(data => {
-      this.user = data['principal']['user'];
+      this.user = data;
       callback && callback(data);
       console.log(data);
     }, err => {
@@ -80,9 +80,8 @@ export class AuthService {
     });
   }
 
-  // social() {
-  //   var secUrl = 'http://211.238.242.169:8899/auth/facebook';
-  //   window.open(secUrl);
-  // }
+  getProviderUrl(provider): string {
+    return `${this.url}/${provider}`;
+  }
 
 }

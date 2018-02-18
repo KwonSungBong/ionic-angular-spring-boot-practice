@@ -82,6 +82,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(customCsrfHeaderFilter, SessionManagementFilter.class);
     }
 
+
+//    @Autowired
+//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(customAuthenticationProvider);
+//    }
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(customAuthenticationProvider);

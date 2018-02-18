@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,15 +30,24 @@ public class AuthController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/token")
     public CsrfToken main(CsrfToken token) {
         return token;
     }
 
+//    @RequestMapping("/me")
+//    @ResponseBody
+//    public Principal getCurrentLoggedInUser(Principal user) {
+//        return user;
+//    }
+
     @RequestMapping("/me")
     @ResponseBody
-    public Principal getCurrentLoggedInUser(Principal user) {
-        return user;
+    public UserDto.Login getCurrentLoggedInUser() {
+        return userService.getCurrentUser();
     }
 
     @RequestMapping("/test")
