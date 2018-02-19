@@ -35,7 +35,6 @@ export class StompClient {
   private topicSubscriptions: Map<string, TopicSubscription> = new Map();
 
   constructor(@Inject('SOCKET_URL') private url: string) {
-    this.connect();
   }
 
   subscribe(topic: string, params: Object): Observable<any> {
@@ -79,7 +78,8 @@ export class StompClient {
     if (this.isConnected()) {
       this.client.disconnect();
       this.socket.close();
-      this.connectionSource.next(false);
+      // this.connectionSource.next(false);
+      this.connectionSource = new BehaviorSubject<boolean>(false)
     }
 
     this.topicSubscriptions.forEach((subscription: TopicSubscription) => subscription.unsubscribe());

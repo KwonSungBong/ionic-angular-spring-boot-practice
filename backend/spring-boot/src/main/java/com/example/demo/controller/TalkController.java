@@ -88,9 +88,10 @@ public class TalkController {
         return talkServiceImpl.findMessageSummaryList(roomIdx);
     }
 
-    @SubscribeMapping("/talk/room.message.insert/{roomIdx}")
+    @SubscribeMapping("/talk/room.message.insert/{roomIdx}/{userIdx}")
     @SendTo("/talk/room.message.list/{roomIdx}")
-    public List<MessageDto.Summary> insertMessage(@DestinationVariable long roomIdx, MessageDto.Create message, Principal user) {
+    public List<MessageDto.Summary> insertMessage(@DestinationVariable long roomIdx, @DestinationVariable long userIdx,
+                                                  MessageDto.Create message, Principal user) {
         User principalUser = userServiceImpl.getUesr(user);
         message.setCreatedUser(new UserDto.Refer(principalUser.getId()));
         message.setRoom(new RoomDto.Refer(roomIdx));

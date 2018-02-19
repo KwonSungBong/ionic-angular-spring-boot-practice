@@ -2,7 +2,8 @@
  * Created by ksb on 2017. 10. 21..
  */
 import {Inject, Injectable} from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {StompClient} from "./stomp.client";
 
 @Injectable()
 export class AuthService {
@@ -10,6 +11,7 @@ export class AuthService {
   user: any;
 
   constructor(private http: HttpClient,
+              private stompClient: StompClient,
               @Inject('AUTH_URL') private url) {
   }
 
@@ -59,6 +61,9 @@ export class AuthService {
   logout(callback) {
     const body = {};
 
+    this.stompClient.unsubscribe('/talk/room.enter/'+this.user.id);
+    this.stompClient.unsubscribe("/app/talk/room.insert/"+this.user.id);
+    this.stompClient.disconnect();
     this.http.post('/api/logout', body, {
       headers: new HttpHeaders().set('X-XSRF-TOKEN', this.token.token),
     }).subscribe(data => {

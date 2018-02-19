@@ -92,7 +92,7 @@ ionic cordova emulate android -lc --prod
 
 https://ionicframework.com/docs/developer-resources/developer-tips/
 
-
+######################################################################################################
 
 
 

@@ -11,30 +11,20 @@ export class TalkService {
   items: any[] = [];
   talk: any = {};
   messages: any[] = [];
+  roomEnterSubscribe: any;
+  roomMessageListSubscribe: any;
 
   constructor(private stompClient: StompClient) {
   }
 
   init(user) {
     this.user = user;
-
-    console.log("TEST", user);
+    console.log("TalkService user", this.stompClient);
 
     let roomList: Observable<any> = this.stompClient.subscribe('/talk/room.list', {});
     roomList.subscribe(response => {
         console.log("list", response);
         this.items = response;
-    });
-
-    let roomEnter: Observable<any> = this.stompClient.subscribe('/talk/room.enter/'+user.id, {});
-    roomEnter.subscribe(response => {
-      this.talk = response;
-      this.findMessage();
-      let roomMessageList: Observable<any> = this.stompClient.subscribe('/talk/room.message.list/'+this.talk.idx, {});
-      roomMessageList.subscribe(response => {
-        console.log("messages"+this.talk.idx, response);
-        this.messages = response;
-      });
     });
 
     this.list();
@@ -45,11 +35,25 @@ export class TalkService {
   }
 
   enter(talk) {
+    let roomEnter: Observable<any> = this.stompClient.subscribe('/talk/room.enter/'+this.user.id, {});
+    this.roomEnterSubscribe = roomEnter.subscribe(room => {
+      this.talk = room;
+      this.findMessage();
+    });
+
+    let roomMessageList: Observable<any> = this.stompClient.subscribe('/talk/room.message.list/'+talk.idx, {});
+    this.roomMessageListSubscribe = roomMessageList.subscribe(roomMessage => {
+      this.messages = roomMessage;
+    });
+
     this.stompClient.send("/app/talk/room.enter/"+this.user.id, {}, JSON.stringify(talk));
   }
 
   exit(){
+    this.roomMessageListSubscribe.unsubscribe();
+    this.roomEnterSubscribe.unsubscribe();
     this.stompClient.unsubscribe('/talk/room.message.list/'+this.talk.idx);
+    this.stompClient.unsubscribe('/talk/room.enter/'+this.user.id);
   }
 
   insert(talk) {
@@ -61,7 +65,7 @@ export class TalkService {
   }
 
   insertMessage(message) {
-    this.stompClient.send("/app/talk/room.message.insert/"+this.talk.idx, {}, JSON.stringify(message));
+    this.stompClient.send("/app/talk/room.message.insert/"+this.talk.idx+"/"+this.user.id, {}, JSON.stringify(message));
   }
 
   // update() {
