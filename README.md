@@ -94,6 +94,15 @@ https://ionicframework.com/docs/developer-resources/developer-tips/
 
 ######################################################################################################
 
+https://ionicframework.com/docs/native/in-app-browser/
+
+ionic cordova platform rm android
+ionic cordova platform add android
+ionic cordova platform rm android
+ionic cordova platform add ios
+
+
+./gradlew build && java -jar build/libs/spring-boot-0.0.1-SNAPSHOT.jar &
 
 
 

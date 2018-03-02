@@ -5,8 +5,10 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://localhost:8899"
+      "proxyUrl": "http://www.bookstorage.kr:8899"
     }
   ],
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

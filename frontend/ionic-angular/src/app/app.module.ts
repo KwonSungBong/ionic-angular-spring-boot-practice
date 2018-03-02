@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import {MyApp} from './app.component';
 
@@ -46,11 +47,12 @@ import {TalkPage} from '../pages/talk/talk';
   providers: [
     StatusBar,
     SplashScreen,
+    InAppBrowser,
     StompClient,
     AuthService,
     TalkService,
-    {provide: 'SOCKET_URL', useValue: 'http://local.bookstorage.kr:8899/websocket'},
-    {provide: 'AUTH_URL', useValue: 'http://local.bookstorage.kr:8899/auth'},
+    {provide: 'SOCKET_URL', useValue: 'http://www.bookstorage.kr:8899/websocket'},
+    {provide: 'AUTH_URL', useValue: 'http://www.bookstorage.kr:8899/auth'},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

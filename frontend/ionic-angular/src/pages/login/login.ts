@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AlertController, App, NavController} from 'ionic-angular';
+import {AlertController, App, NavController, Platform} from 'ionic-angular';
+import {InAppBrowser, InAppBrowserObject} from '@ionic-native/in-app-browser';
 
 import {HomePage} from '../home/home';
 import {LoginWithEmailPage} from '../loginWithEmail/loginWithEmail';
@@ -16,6 +17,8 @@ export class LoginPage {
   loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(public navCtrl: NavController,
+              private iab: InAppBrowser,
+              private plt: Platform,
               protected app: App,
               public alertCtrl: AlertController,
               private authService: AuthService) {
@@ -42,16 +45,27 @@ export class LoginPage {
   }
 
   private loginWithSocial(provider) {
-    this.loading.next(true);
-    var url = this.authService.getProviderUrl(provider);
-    this.windowOpener = window.open(url);
-    var timer = setInterval(() => {
-      if(this.windowOpener.closed) {
-        clearInterval(timer);
+    if(this.plt.is("android") || this.plt.is("ios")) {
+      const url = this.authService.getProviderUrl(provider);
+      let browser: InAppBrowserObject = this.iab.create(url);
+      browser.on('exit').subscribe(event => {
+        console.log("exit -->", event);
         this.load();
-        this.loading.next(false);
-      }
-    }, 1000);
+      }, err => {
+        console.log("exit Error: " + err);
+      });
+    } else {
+      this.loading.next(true);
+      var url = this.authService.getProviderUrl(provider);
+      this.windowOpener = window.open(url);
+      var timer = setInterval(() => {
+        if(this.windowOpener.closed) {
+          clearInterval(timer);
+          this.load();
+          this.loading.next(false);
+        }
+      }, 1000);
+    }
   }
 
   private load(): void {
@@ -60,4 +74,7 @@ export class LoginPage {
     }));
   }
 
+  public test() {
+    this.load();
+  }
 }
