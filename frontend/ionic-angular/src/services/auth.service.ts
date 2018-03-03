@@ -86,7 +86,8 @@ export class AuthService {
   }
 
   getProviderUrl(provider): string {
-    return `${this.url}/${provider}`;
+    // return `${this.url}/${provider}`;
+    return `/api/auth/${provider}`;
   }
 
 }

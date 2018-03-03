@@ -47,7 +47,9 @@ export class LoginPage {
   private loginWithSocial(provider) {
     if(this.plt.is("android") || this.plt.is("ios")) {
       const url = this.authService.getProviderUrl(provider);
-      let browser: InAppBrowserObject = this.iab.create(url);
+      let browser: InAppBrowserObject = this.iab.create(url, '_blank', 'location=true');
+      // browser.executeScript({code: "(function() { alert(123); })()"});
+
       browser.on('exit').subscribe(event => {
         console.log("exit -->", event);
         this.load();
@@ -74,7 +76,4 @@ export class LoginPage {
     }));
   }
 
-  public test() {
-    this.load();
-  }
 }
